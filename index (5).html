@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fan Reward Survey — Claim Your $1,000</title>
+  <meta name="description" content="Ticketmaster is compensating fans for their experience. Complete a short survey and claim your $1,000 shopping reward.">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BV47JTL2R9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BV47JTL2R9');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #07080f;
+      --bg2: #0d0f1c;
+      --blue: #2563EB;
+      --blue-light: #3b82f6;
+      --blue-glow: rgba(37, 99, 235, 0.35);
+      --text: #f0f2ff;
+      --muted: #8b90b0;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --success: #22c55e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── AMBIENT LIGHT BLOBS ── */
+    .ambient {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-1 {
+      width: 500px; height: 500px;
+      background: rgba(37, 99, 235, 0.12);
+      top: -100px; left: -150px;
+    }
+    .ambient-2 {
+      width: 400px; height: 400px;
+      background: rgba(99, 37, 235, 0.08);
+      bottom: 20%; right: -100px;
+    }
+    .ambient-3 {
+      width: 300px; height: 300px;
+      background: rgba(37, 99, 235, 0.07);
+      bottom: -50px; left: 20%;
+    }
+
+    /* ── SCANLINE EFFECT ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── LAYOUT ── */
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: rgba(37, 99, 235, 0.08);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+      font-size: 12px;
+      color: var(--blue-light);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      position: relative;
+      z-index: 2;
+    }
+    .topbar-dot {
+      width: 6px; height: 6px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 24px;
+      padding: 6px 14px;
+      border: 1px solid rgba(37,99,235,0.3);
+      border-radius: 100px;
+      background: rgba(37,99,235,0.06);
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 16vw, 80px);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .hero-title span {
+      color: var(--blue-light);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 340px;
+      margin: 16px auto 0;
+      line-height: 1.6;
+    }
+
+    /* ── LIVE COUNTER ── */
+    .live-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin: 28px 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .live-strip-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .live-strip-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .live-strip-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+    }
+
+    /* ── STAT CARD ── */
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0.6;
+    }
+    .stat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .stat-card-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .stat-card-icon {
+      width: 32px; height: 32px;
+      background: rgba(37,99,235,0.12);
+      border: 1px solid rgba(37,99,235,0.2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .stat-card-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      color: var(--blue-light);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .stat-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .stat-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-light));
+      border-radius: 100px;
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .stat-bar-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .stat-bar-meta span:last-child {
+      color: var(--blue-light);
+      font-weight: 600;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 32px 0 20px;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-divider span {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      transition: border-color 0.2s;
+    }
+    .step:hover { border-color: rgba(37,99,235,0.3); }
+    .step-num {
+      width: 32px; height: 32px;
+      min-width: 32px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: white;
+      letter-spacing: 0.05em;
+    }
+    .step-content h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .step-content p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .step-icon {
+      margin-left: auto;
+      font-size: 18px;
+      opacity: 0.5;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .testimonial {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .testimonial-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(37,99,235,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue-light);
+    }
+    .testimonial-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .testimonial-stars {
+      margin-left: auto;
+      font-size: 11px;
+      color: #f59e0b;
+      letter-spacing: 1px;
+    }
+    .testimonial p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* ── TRUST BADGES ── */
+    .trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .trust-item svg { color: var(--success); }
+
+    /* ── CTA ── */
+    .cta-wrap {
+      margin: 28px 0 16px;
+      text-align: center;
+    }
+
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px 24px;
+      background: var(--blue);
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 0 0 0 var(--blue-glow);
+      animation: cta-glow 2.5s ease-in-out infinite;
+    }
+    @keyframes cta-glow {
+      0%, 100% { box-shadow: 0 4px 24px rgba(37,99,235,0.3); }
+      50% { box-shadow: 0 4px 40px rgba(37,99,235,0.55); }
+    }
+    .cta-btn:active { transform: scale(0.98); }
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+    }
+    .cta-btn-arrow {
+      font-size: 18px;
+      transition: transform 0.2s;
+    }
+    .cta-btn:hover .cta-btn-arrow { transform: translateX(4px); }
+
+    .cta-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* ── SCARCITY BAR ── */
+    .scarcity {
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.15);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .scarcity-left {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .scarcity-left strong {
+      color: var(--text);
+      display: block;
+      font-size: 14px;
+    }
+    .scarcity-badge {
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(37,99,235,0.25);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue-light);
+      white-space: nowrap;
+    }
+
+    /* ── FAQ ── */
+    .faq {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 16px;
+      text-align: left;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .faq-q:hover { color: var(--blue-light); }
+    .faq-icon {
+      font-size: 18px;
+      color: var(--muted);
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--blue-light); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 0 16px;
+    }
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding: 0 16px 16px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 20px 20px;
+      font-size: 11px;
+      color: rgba(139,144,176,0.5);
+      line-height: 1.7;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
+  <div class="ambient ambient-3"></div>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-dot"></div>
+    <span>Fan Survey Program — <strong>1,847 fans</strong> claimed this week</span>
+  </div>
+
+  <div class="wrapper">
+
+    <!-- HERO -->
+    <div class="hero fade-up">
+      <div class="hero-eyebrow">
+        🎟️ Official Fan Reward Survey
+      </div>
+      <h1 class="hero-title">
+        Get Your
+        <span>$1,000</span>
+        Reward
+      </h1>
+      <p class="hero-sub">
+        Share your concert experience. Take a short survey. Receive your $1,000 Ticketmaster shopping reward.
+      </p>
+    </div>
+
+    <!-- LIVE STRIP -->
+    <div class="live-strip fade-up delay-1">
+      <div class="live-strip-item">
+        <span>👥</span>
+        <span><strong id="counter">2,341</strong> applied today</span>
+      </div>
+      <div class="live-strip-divider"></div>
+      <div class="live-strip-item">
+        <span>🎟️</span>
+        <span>Concert fans eligible</span>
+      </div>
+      <div class="live-strip-divider"></div>
+      <div class="live-strip-item">
+        <span>✅</span>
+        <span><strong>No purchase</strong> needed</span>
+      </div>
+    </div>
+
+    <!-- STAT CARD -->
+    <div class="stat-card fade-up delay-2">
+      <div class="stat-card-header">
+        <div>
+          <div class="stat-card-label">Total paid out to fans this year</div>
+        </div>
+        <div class="stat-card-icon">📊</div>
+      </div>
+      <div class="stat-card-number">$3,100,000+</div>
+      <div class="stat-bar">
+        <div class="stat-bar-fill" id="statBar" style="width: 87%;"></div>
+      </div>
+      <div class="stat-bar-meta">
+        <span>👥 14,200+ fans rewarded</span>
+        <span>87% received full $1,000</span>
+      </div>
+    </div>
+
+    <!-- SCARCITY -->
+    <div class="scarcity fade-up delay-2">
+      <div class="scarcity-left">
+        <strong>Maximize your reward</strong>
+        Complete more deals to unlock the full $1,000
+      </div>
+      <div class="scarcity-badge">⚡ Up to $1,000</div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrap fade-up delay-3">
+      <a href="https://trksy.org/aff_c?offer_id=4104&aff_id=167172" target="_blank" rel="noopener" class="cta-btn" onclick="gtag('event','click',{event_category:'CTA',event_label:'hero_cta'})">
+        Claim My $1,000 Reward
+        <span class="cta-btn-arrow">→</span>
+      </a>
+      <p class="cta-sub">
+        🔒 No credit card required · No purchase necessary
+      </p>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="section-divider fade-up delay-3">
+      <span>How It Works</span>
+    </div>
+
+    <div class="steps">
+      <div class="step fade-up delay-2">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Verify You Qualify</h3>
+          <p>Answer a short questionnaire about your concert and event experience</p>
+        </div>
+        <div class="step-icon">✓</div>
+      </div>
+      <div class="step fade-up delay-3">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Complete Sponsored Deals</h3>
+          <p>Complete 3–5 partner deals to unlock your full reward — the more you complete, the higher your payout</p>
+        </div>
+        <div class="step-icon">🎤</div>
+      </div>
+      <div class="step fade-up delay-4">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Receive Your $1,000</h3>
+          <p>Your Ticketmaster shopping reward is delivered to your email after deal completion</p>
+        </div>
+        <div class="step-icon">🎟️</div>
+      </div>
+    </div>
+
+    <!-- SECOND CTA -->
+    <div class="cta-wrap fade-up delay-3" style="margin-top: 24px;">
+      <a href="https://trksy.org/aff_c?offer_id=4104&aff_id=167172" target="_blank" rel="noopener" class="cta-btn" onclick="gtag('event','click',{event_category:'CTA',event_label:'mid_cta'})">
+        Start My Survey Now
+        <span class="cta-btn-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="section-divider fade-up">
+      <span>What Fans Are Saying</span>
+    </div>
+
+    <div class="testimonials">
+      <div class="testimonial fade-up delay-1">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">J</div>
+          <div>
+            <div class="testimonial-name">Jamie R.</div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
+        <p>"Saw it in someone's TikTok comments, thought it was fake. Did it anyway. Got my $1,000 reward in 4 days. Genuinely shocked."</p>
+      </div>
+      <div class="testimonial fade-up delay-2">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Marcus T.</div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
+        <p>"Took me maybe 3 minutes. Survey was easy, nothing crazy. The $1,000 more than covered what I spent on fees this year."</p>
+      </div>
+      <div class="testimonial fade-up delay-3">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Alyssa K.</div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
+        <p>"My friend told me about this after she got hers. Did it the same night. Whole process was super smooth."</p>
+      </div>
+    </div>
+
+    <div class="trust fade-up">
+      <div class="trust-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        SSL Secured
+      </div>
+      <div class="trust-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Verified Program
+      </div>
+      <div class="trust-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Privacy Protected
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-divider fade-up">
+      <span>Questions</span>
+    </div>
+
+    <div class="faq fade-up">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is there a cost to participate?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">There is no upfront cost to start. Sponsored deals may have their own terms — completing them is what unlocks your reward.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How do I maximize my reward?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Completing more sponsored deals increases your reward amount. Fans who complete 3–5 deals consistently receive the full $1,000 reward.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          When do I receive my reward?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Your reward is delivered to your email once you have completed the required sponsored deals. Delivery times vary based on deal completion.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need prior concert tickets?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">No — the survey is open to anyone interested in live events, concerts, sports, and entertainment. No prior purchases required.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Why is this reward being offered?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Fan feedback and engagement with partner deals helps fund the reward program. Your participation directly supports the reward value you receive.</div>
+      </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div class="cta-wrap fade-up" style="margin-top: 36px;">
+      <a href="https://trksy.org/aff_c?offer_id=4104&aff_id=167172" target="_blank" rel="noopener" class="cta-btn" onclick="gtag('event','click',{event_category:'CTA',event_label:'bottom_cta'})">
+        Claim My $1,000 Now
+        <span class="cta-btn-arrow">→</span>
+      </a>
+      <p class="cta-sub">🔒 No credit card required · Complete deals to unlock full reward</p>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 Fan Reward Survey Program. This is an independent promotional program.<br>
+    Not affiliated with or endorsed by Ticketmaster Entertainment, Inc.<br>
+    <span style="opacity:0.5">Completion of survey steps required to receive reward.</span>
+  </footer>
+
+  <script>
+    // ── FAQ TOGGLE ──
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // ── SCROLL ANIMATIONS ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── STAT BAR ANIMATE ──
+    setTimeout(() => {
+      const bar = document.getElementById('statBar');
+      if (bar) bar.style.width = '87%';
+    }, 600);
+
+    // ── LIVE COUNTER (subtle increment) ──
+    let count = 2341;
+    setInterval(() => {
+      if (Math.random() > 0.6) {
+        count += Math.floor(Math.random() * 3) + 1;
+        const el = document.getElementById('counter');
+        if (el) el.textContent = count.toLocaleString();
+      }
+    }, 8000);
+
+    // ── TRACK SCROLL DEPTH ──
+    let depths = { 25: false, 50: false, 75: false, 100: false };
+    window.addEventListener('scroll', () => {
+      const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      [25, 50, 75, 100].forEach(d => {
+        if (pct >= d && !depths[d]) {
+          depths[d] = true;
+          gtag('event', 'scroll_depth', { event_category: 'Engagement', event_label: d + '%' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
