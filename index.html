@@ -16,190 +16,220 @@
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #f5f5f5;
+      background: #F0F4F8;
       color: #111;
-      min-height: 100vh;
-      padding-bottom: 100px;
+      min-height: 100dvh;
+      padding-bottom: 110px;
     }
 
-    .topbar {
-      background: #026CDF;
-      color: white;
-      text-align: center;
-      padding: 10px 16px;
-      font-size: 12px;
-      font-weight: 500;
+    /* WRAPPER */
+    .wrapper {
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 28px 18px 16px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
     }
-    .topbar-dot {
-      width: 7px; height: 7px;
-      background: #4ade80;
+
+    /* ONLINE PILL */
+    .online-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #333;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.09);
+      margin-bottom: 28px;
+    }
+    .online-dot {
+      width: 8px; height: 8px;
+      background: #22c55e;
       border-radius: 50%;
       animation: blink 2s infinite;
     }
     @keyframes blink {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+      50% { opacity: 0.4; }
     }
 
-    .wrapper {
-      max-width: 460px;
-      margin: 0 auto;
-      padding: 24px 16px;
+    /* LOGO */
+    .logo {
+      margin-bottom: 22px;
+    }
+    .logo img {
+      height: 52px;
+      object-fit: contain;
     }
 
-    .logo-area {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .logo-text {
-      font-size: 26px;
-      font-weight: 800;
-      color: #026CDF;
-    }
-    .logo-divider {
-      width: 40px; height: 3px;
-      background: #026CDF;
-      margin: 8px auto 0;
-      border-radius: 2px;
-    }
-
+    /* HEADLINE */
     .headline {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 28px;
     }
     .headline h1 {
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 700;
-      color: #026CDF;
-      margin-bottom: 6px;
+      color: #111;
+      margin-bottom: 8px;
+      line-height: 1.3;
     }
     .headline p {
-      font-size: 13px;
-      color: #555;
-      line-height: 1.5;
+      font-size: 14px;
+      color: #777;
+      line-height: 1.55;
+      font-weight: 400;
     }
-    .headline p strong { color: #026CDF; }
+    .headline p strong {
+      color: #026CDF;
+      font-weight: 600;
+    }
 
+    /* CARD */
     .card {
       background: white;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-radius: 22px;
+      padding: 22px 20px;
+      margin-bottom: 14px;
+      width: 100%;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .card-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
       color: #026CDF;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
 
-    .steps { display: flex; flex-direction: column; gap: 12px; }
-    .step { display: flex; align-items: flex-start; gap: 12px; }
-    .step-num {
-      width: 28px; height: 28px; min-width: 28px;
-      background: #026CDF; color: white;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700;
+    /* CHECKLIST */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
-    .step-text { padding-top: 4px; }
-    .step-text strong { display: block; font-size: 13px; font-weight: 600; color: #111; margin-bottom: 1px; }
-    .step-text span { font-size: 12px; color: #777; }
-
-    .checklist { display: flex; flex-direction: column; gap: 10px; }
-    .check-item { display: flex; align-items: flex-start; gap: 10px; }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
     .check-icon {
-      width: 20px; height: 20px; min-width: 20px;
-      background: rgba(2,108,223,0.1);
+      width: 28px; height: 28px;
+      min-width: 28px;
+      background: #EEF4FF;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       margin-top: 1px;
     }
-    .check-icon svg { width: 11px; height: 11px; stroke: #026CDF; }
-    .check-text strong { display: block; font-size: 13px; font-weight: 600; color: #111; }
-    .check-text span { font-size: 12px; color: #777; }
+    .check-icon svg {
+      width: 13px; height: 13px;
+      stroke: #026CDF;
+    }
+    .check-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 2px;
+    }
+    .check-text span {
+      font-size: 13px;
+      color: #888;
+      font-weight: 400;
+    }
 
-    .faq { display: flex; flex-direction: column; }
+    /* FAQ */
+    .faq { display: flex; flex-direction: column; width: 100%; }
     .faq-item { border-top: 1px solid #f0f0f0; }
     .faq-item:last-child { border-bottom: 1px solid #f0f0f0; }
     .faq-q {
       width: 100%; background: none; border: none;
-      padding: 14px 0; text-align: left;
+      padding: 15px 0; text-align: left;
       font-family: 'Inter', sans-serif;
-      font-size: 13px; font-weight: 500; color: #111;
+      font-size: 14px; font-weight: 400; color: #111;
       cursor: pointer;
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
     }
-    .faq-icon { font-size: 20px; color: #999; line-height: 1; transition: transform 0.2s; flex-shrink: 0; }
+    .faq-icon {
+      font-size: 20px; color: #aaa; line-height: 1;
+      transition: transform 0.2s; flex-shrink: 0;
+    }
     .faq-item.open .faq-icon { transform: rotate(45deg); color: #026CDF; }
     .faq-a {
       max-height: 0; overflow: hidden;
       transition: max-height 0.3s ease;
-      font-size: 12px; color: #666; line-height: 1.6;
+      font-size: 13px; color: #666; line-height: 1.6; font-weight: 400;
     }
-    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 14px; }
+    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 15px; }
 
+    /* NOTICE */
     .notice {
-      font-size: 11px; color: #999;
-      text-align: center; margin-bottom: 12px; line-height: 1.5;
+      font-size: 11px; color: #bbb;
+      text-align: center; margin-bottom: 8px;
+      line-height: 1.6; width: 100%;
     }
 
+    /* FOOTER */
     footer {
-      text-align: center; font-size: 10px; color: #bbb;
-      padding: 8px 16px 16px; line-height: 1.7;
+      text-align: center; font-size: 10px; color: #ccc;
+      padding: 4px 16px 12px; line-height: 1.7; width: 100%;
     }
 
+    /* STICKY CTA */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0;
-      padding: 12px 16px 24px;
-      background: linear-gradient(to top, #f5f5f5 70%, transparent);
+      padding: 10px 18px 28px;
+      background: linear-gradient(to top, #F0F4F8 65%, transparent);
       z-index: 100;
     }
     .cta-btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       width: 100%; max-width: 460px; margin: 0 auto;
-      padding: 16px;
+      padding: 17px;
       background: #026CDF; color: white;
       font-family: 'Inter', sans-serif;
       font-size: 16px; font-weight: 700;
       border: none; border-radius: 50px;
       cursor: pointer; text-decoration: none;
-      box-shadow: 0 4px 16px rgba(2,108,223,0.35);
-      transition: transform 0.15s;
+      box-shadow: 0 6px 20px rgba(2,108,223,0.3);
+      letter-spacing: 0.01em;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
-    .cta-btn:active { transform: scale(0.98); }
+    .cta-btn:active { transform: scale(0.98); box-shadow: 0 2px 10px rgba(2,108,223,0.2); }
   </style>
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="topbar-dot"></div>
-    <span>Fan Reward Program — <strong>1,847 fans</strong> claimed this week</span>
-  </div>
-
   <div class="wrapper">
 
-    <div class="logo-area">
-      <img src="https://s3.eu-west-1.amazonaws.com/prd273.tm-intl-pci.mfol.prod1.eu-west-1.tmaws-static-pages/media/tmeu/poland/help/logo_guide/assets/Ticketmaster-Logo-Azure-RGB.png" alt="Ticketmaster" style="height: 48px; object-fit: contain;">
+    <!-- ONLINE PILL -->
+    <div class="online-pill">
+      <div class="online-dot"></div>
+      <span>1,847 fans claimed this week</span>
     </div>
 
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="https://s3.eu-west-1.amazonaws.com/prd273.tm-intl-pci.mfol.prod1.eu-west-1.tmaws-static-pages/media/tmeu/poland/help/logo_guide/assets/Ticketmaster-Logo-Azure-RGB.png" alt="Ticketmaster">
+    </div>
+
+    <!-- HEADLINE -->
     <div class="headline">
-      <h1>Claim Your $1,000 Shopping Reward</h1>
-      <p>Complete your registration to receive your <strong>$1,000 Ticketmaster reward</strong></p>
+      <h1>Fan Reward Program</h1>
+      <p>Complete a few simple steps and receive a reward worth up to <strong>$1,000</strong></p>
     </div>
 
+    <!-- QUICK START GUIDE -->
     <div class="card">
       <div class="card-title">Quick Start Guide</div>
       <div class="checklist">
@@ -233,6 +263,7 @@
       </div>
     </div>
 
+    <!-- COMMON QUESTIONS -->
     <div class="card">
       <div class="card-title">Common Questions</div>
       <div class="faq">
@@ -268,7 +299,7 @@
     </div>
 
     <div class="notice">
-      By clicking "Claim Now" you agree to complete the required steps to receive your reward.
+      By clicking "Get Started" you agree to complete the required steps to receive your reward.
     </div>
 
     <footer>
@@ -279,12 +310,13 @@
 
   </div>
 
+  <!-- STICKY CTA -->
   <div class="sticky-cta">
     <a href="https://trksy.org/aff_c?offer_id=4104&aff_id=167172"
        target="_blank" rel="noopener"
        class="cta-btn"
        onclick="gtag('event','click',{event_category:'CTA',event_label:'sticky_cta'})">
-      Claim Now →
+      Get Started →
     </a>
   </div>
 
